@@ -1,25 +1,35 @@
 ---
-- name: Install-nginx with block
+- name: Using loop, until, with_fileglob
   hosts: all
   become: yes
-  vars:
-    source_file: ./index.html
-    dest_file: /var/www/html/
   tasks:
-  - block: #for Debian
-     - name: make apt update
-       shell: cmd='sudo apt update'
-     - name: install nginx
-       apt: name=nginx state=latest
-     - name: copy files to dir
-       copy: src={{ source_file}} dest={{dest_file}}
-       notify:
-       - restart_nginx
-     - name: start nginx
-       service: name=nginx state=started enabled=yes
-    when: ansible_os_family=="Debian"
+  - name: loop
+    debug:
+      msg: "Hello from {{item}}"
+    loop:
+      - "Me"
+      - "World"
+      
+  - name: until
+    shell: echo -n z>>file.txt && cat file.txt
+    register: var1
+    delay: 2
+    retries: 10
+    until: var1.stdout.find("zzzzz")==false
+    notify: 
+      - until_notify
+      
+  - name: with_fileglob
+    vars:
+      - dest_f: ./
+      - source_f: ./
+    copy: src={{ item }} dest={{ dest_f }}
+    with_fileglob: "{{ source_f }}/*.*"
+ 
+ 
+ 
   handlers:
-  - name: restart_nginx
-    service: name=nginx state=restarted
-
+  - name: until_notify
+    debug:
+      var: var1
 
