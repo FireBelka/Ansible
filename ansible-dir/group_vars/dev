@@ -1,0 +1,4 @@
+---
+ansible_user : azureuser
+ansible_ssh_private_key_file : ./ssh-keys/key1
+

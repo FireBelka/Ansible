@@ -1,0 +1,17 @@
+---
+- name: Install-nginx
+  hosts: all
+  become: yes
+  vars:
+    source_file: ./index.html
+    dest_file: /var/www/html/
+  tasks:
+  - name: make apt update
+    shell: cmd='sudo apt update'
+  - name: install nginx
+    yum: name=nginx state=latest
+  - name: copy files to dir
+    copy: src={{ source_file}} dest={{dest_file}}
+  - name: start nginx
+    service: name=nginx state=started enabled=yes
+

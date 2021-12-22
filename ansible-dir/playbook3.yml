@@ -1,0 +1,10 @@
+---
+- name: Delete-nginx
+  hosts: all
+  become: yes
+  tasks:
+  - name: stop nginx
+    service: name=nginx state=stopped enabled=no
+  - name: delete nginx
+    yum: name=nginx state=absent
+

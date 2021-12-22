@@ -1,0 +1,25 @@
+---
+- name: Install-nginx with block
+  hosts: all
+  become: yes
+  vars:
+    source_file: ./index.html
+    dest_file: /var/www/html/
+  tasks:
+  - block: #for Debian
+     - name: make apt update
+       shell: cmd='sudo apt update'
+     - name: install nginx
+       apt: name=nginx state=latest
+     - name: copy files to dir
+       copy: src={{ source_file}} dest={{dest_file}}
+       notify:
+       - restart_nginx
+     - name: start nginx
+       service: name=nginx state=started enabled=yes
+    when: ansible_os_family=="Debian"
+  handlers:
+  - name: restart_nginx
+    service: name=nginx state=restarted
+
+
