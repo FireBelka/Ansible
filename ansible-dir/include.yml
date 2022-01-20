@@ -1,0 +1,4 @@
+---
+- name: make apt update
+       shell: cmd='sudo apt update'
+

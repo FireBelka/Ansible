@@ -1,0 +1,22 @@
+---
+- name: Install-nginx with block
+  hosts: all
+  become: yes
+  vars:
+    source_file: ./index.j2
+    dest_file: /var/www/html/index.html
+  tasks:
+  - block: #for Debian
+     - include: include.yml
+     - name: install nginx
+       apt: name=nginx state=latest
+     - name: copy files to dir
+       template: src={{ source_file}} dest={{dest_file}}
+       notify:
+       - restart_nginx
+     - name: start nginx
+       service: name=nginx state=started enabled=yes
+    when: ansible_os_family=="Debian"
+  handlers:
+  - name: restart_nginx
+    service: name=nginx state=restarted

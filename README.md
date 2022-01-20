@@ -11,3 +11,5 @@ Using handles, block and when cmd
 Using loop, until, with_fileglob
 ## Playbook6  
 Using Jinja Templates
+## Playbook7
+Using Include file
