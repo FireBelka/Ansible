@@ -286,14 +286,14 @@ resource "azurerm_linux_virtual_machine" "myterraformvm1" {
     private_key = file("~/.ssh/id_rsa")
     host        = "unique-vm-vm-22.eastus.cloudapp.azure.com"
   }
-  provisioner "remote-exec" {
-    #    command = "sudo mkdir /home/azureuser/ans-test/"
-    inline = ["mkdir /home/azureuser/ans-test/"]
-  }
+
   provisioner "file" {
     source      = "./ansible-dir/"
     destination = "/home/azureuser/"
 #    destination = "/home/azureuser/ans-test/"
+  }
+  provisioner "remote-exec" {
+    inline = ["chmod 400 ssh-keys/key*"]
   }
 }
 
