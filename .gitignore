@@ -1,4 +1,2 @@
-*terraform*
-*.save
-creds.txt
+init-dir
 */ssh-keys/

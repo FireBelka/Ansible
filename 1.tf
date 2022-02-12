@@ -29,14 +29,14 @@ variable "machines" {
 }
 locals {
   env_variables_prod = {
-    DOCKER_REGISTRY_SERVER_URL      = "testregk8s.azurecr.io"
-    DOCKER_REGISTRY_SERVER_USERNAME = "testRegK8s"
-    DOCKER_REGISTRY_SERVER_PASSWORD = "GSmPiVOGUT/D01OZCGYdy4fn=WOSZsYR"
+    DOCKER_REGISTRY_SERVER_URL      = ...
+    DOCKER_REGISTRY_SERVER_USERNAME = ...
+    DOCKER_REGISTRY_SERVER_PASSWORD = ...
   }
   env_variables_staging = {
-    DOCKER_REGISTRY_SERVER_URL      = "testregk8s.azurecr.io"
-    DOCKER_REGISTRY_SERVER_USERNAME = "testRegK8s"
-    DOCKER_REGISTRY_SERVER_PASSWORD = "GSmPiVOGUT/D01OZCGYdy4fn=WOSZsYR"
+    DOCKER_REGISTRY_SERVER_URL      = ...
+    DOCKER_REGISTRY_SERVER_USERNAME = ...
+    DOCKER_REGISTRY_SERVER_PASSWORD = ...
   }
 }
 
@@ -274,17 +274,17 @@ resource "azurerm_linux_virtual_machine" "myterraformvm1" {
   }
   custom_data                     = base64encode(file("init.sh"))
   computer_name                   = "myvm1"
-  admin_username                  = "azureuser"
+  admin_username                  = "..."
   disable_password_authentication = true
   admin_ssh_key {
-    username   = "azureuser"
+    username   = "..."
     public_key = file("~/.ssh/id_rsa.pub")
   }
   connection {
     type        = "ssh"
-    user        = "azureuser"
+    user        = "..."
     private_key = file("~/.ssh/id_rsa")
-    host        = "unique-vm-vm-22.eastus.cloudapp.azure.com"
+    host        = "eastus.cloudapp.azure.com"
   }
 
   provisioner "file" {
