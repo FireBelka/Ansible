@@ -13,3 +13,5 @@ Using loop, until, with_fileglob
 Using Jinja Templates
 ## Playbook7
 Using Include file
+## Playbook8
+Using different variables for diferent nodes(var=hostvars)

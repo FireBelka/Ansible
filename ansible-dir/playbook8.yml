@@ -1,0 +1,9 @@
+---
+- name: different variable files
+  hosts: all
+  become: yes
+  tasks:
+  - include: rules.yml   
+  - name: debug
+    debug: var=abcd
+

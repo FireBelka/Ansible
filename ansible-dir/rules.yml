@@ -1,0 +1,8 @@
+---
+- name: import vars
+  include_vars: ~/var-files/var{{item}}.yml
+  when: inventory_hostname=="machine-{{item}}"
+  loop:
+    - "1"
+    - "2"
+
