@@ -14,4 +14,4 @@ Using Jinja Templates
 ## Playbook7
 Using Include file
 ## Playbook8
-Using different variables for diferent nodes(var=hostvars)
+Using different variables for different nodes(var=hostvars)
